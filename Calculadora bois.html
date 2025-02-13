@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Rendimento Bovino</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; }
+        table { margin: 20px auto; border-collapse: collapse; width: 50%; }
+        th, td { border: 1px solid black; padding: 8px; text-align: center; }
+        .editable { background-color: yellow; }
+    </style>
+</head>
+<body>
+    <h2>Calculadora de Rendimento Bovino</h2>
+    <table>
+        <tr>
+            <th>Fornecedor</th>
+            <th>Peso (kg)</th>
+            <th>%</th>
+            <th>@ (R$/arroba)</th>
+            <th>Valor Total (R$)</th>
+        </tr>
+        <tr>
+            <td>BMG</td>
+            <td><input type="number" id="pesoBMG" value="600" disabled></td>
+            <td><input type="number" id="percBMG" class="editable" value="55.8" oninput="calcularValor('BMG')"></td>
+            <td><input type="number" id="arrobaBMG" class="editable" value="320" oninput="calcularValor('BMG')"></td>
+            <td id="totalBMG">0</td>
+        </tr>
+        <tr>
+            <td>JR</td>
+            <td><input type="number" id="pesoJR" value="600" disabled></td>
+            <td><input type="number" id="percJR" class="editable" value="54.8" oninput="calcularValor('JR')"></td>
+            <td><input type="number" id="arrobaJR" class="editable" value="320" oninput="calcularValor('JR')"></td>
+            <td id="totalJR">0</td>
+        </tr>
+    </table>
+    
+    <script>
+        function calcularValor(fornecedor) {
+            let peso = document.getElementById(`peso${fornecedor}`).value;
+            let perc = document.getElementById(`perc${fornecedor}`).value;
+            let arroba = document.getElementById(`arroba${fornecedor}`).value;
+            
+            let valorTotal = (peso * (perc / 100)) * (arroba / 15);
+            document.getElementById(`total${fornecedor}`).innerText = `R$ ${valorTotal.toFixed(2)}`;
+        }
+        
+        calcularValor('BMG');
+        calcularValor('JR');
+    </script>
+</body>
+</html>
